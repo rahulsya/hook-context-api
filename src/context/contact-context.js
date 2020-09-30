@@ -28,7 +28,7 @@ const reducer = (state, action) => {
   switch (action.type) {
     case "ADD_CONTACT":
       return {
-        contacts: [...state, action.payload],
+        contacts: [...state.contacts, action.payload],
       };
     case "DEL_CONTACT":
       return {
@@ -49,9 +49,8 @@ const reducer = (state, action) => {
 
 export const ContactContextProvider = (props) => {
   const [state, dispatch] = React.useReducer(reducer, initialState);
-
   return (
-    <ContactContex.Provider value={[state, dispatch]}>
+    <ContactContex.Provider value={{ state, dispatch }}>
       {props.children}
     </ContactContex.Provider>
   );
